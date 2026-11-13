@@ -1,0 +1,13 @@
+SubLabel 1.0 SubLabel.qml
+Hint 1.0 Hint.qml
+Chip 1.0 Chip.qml
+SectionCard 1.0 SectionCard.qml
+ColourButton 1.0 ColourButton.qml
+AttrSlider 1.0 AttrSlider.qml
+FanCurveEditor 1.0 FanCurveEditor.qml
+LaptopHero 1.0 LaptopHero.qml
+LightingTab 1.0 LightingTab.qml
+PerformanceTab 1.0 PerformanceTab.qml
+FansTab 1.0 FansTab.qml
+SystemTab 1.0 SystemTab.qml
+singleton RogService 1.0 RogService.qml
