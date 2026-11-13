@@ -1,0 +1,18 @@
+{
+    "id": "zephyrus",
+    "name": "Zephyrus",
+    "description": "Modes (Eco, Silent, Balanced, Performance, Gaming) for the ROG Zephyrus G14 on top of asusd and cardwire: GPU mode and panel mux, platform profile, CPU/dGPU power limits, fans, charge limit and keyboard light. Talks to both daemons over D-Bus through DMS.",
+    "version": "0.1.0",
+    "author": "mirza-src",
+    "license": "MIT",
+    "icon": "laptop",
+    "type": "composite",
+    "capabilities": ["daemon", "dankbar-widget", "control-center"],
+    "components": {
+        "daemon": "./ZephyrusDaemon.qml",
+        "widget": "./ZephyrusWidget.qml"
+    },
+    "settings": "./ZephyrusSettings.qml",
+    "requires_dms": ">=1.5.0",
+    "permissions": ["settings_read", "settings_write"]
+}

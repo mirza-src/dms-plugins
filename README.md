@@ -7,15 +7,20 @@ Each top-level directory is one plugin, named after the `id` in its
 `plugin.json` (the layout the [plugin registry](https://github.com/AvengeMedia/dms-plugin-registry)
 expects for a monorepo).
 
+| Plugin     | What it does                                                                                   |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| `zephyrus` | ROG Zephyrus G14: modes over asusd + cardwire (GPU/mux, profile, power limits, fans, keyboard) |
+
 ## Rules
 
 - **A plugin directory is exactly what DMS loads.** The Nix package copies it
   unchanged; nothing is patched in at build time. That way the live checkout
   and the installed package behave the same.
 - **No hardcoded paths, few dependencies.** Talk to system services over
-  D-Bus (`busctl`, part of systemd) and to the kernel through sysfs. Tools a
-  plugin runs are found on `PATH` and listed in `nix/<id>.nix`
-  (`runtimeDeps`); the system installs them.
+  D-Bus through DMS's bridge (`DMSService.sendRequest("dbus.call", …)`; typed
+  values need the `dms-dbus-typed-values` patch from my dotfiles until it's
+  upstream). Tools a plugin runs are found on `PATH` and listed in
+  `nix/<id>.nix` (`runtimeDeps`); the system installs them.
 
 ## Live editing
 
