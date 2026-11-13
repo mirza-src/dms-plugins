@@ -11,6 +11,9 @@ PluginComponent {
 
     // All state and D-Bus I/O lives in the shared RogService singleton.
     readonly property var svc: RogService
+    // With "Show platform profile in bar" on, the pill shows only the
+    // performance-profile icon (no keyboard icon or brightness bars).
+    readonly property bool profileOnly: svc.showProfileInBar && svc.hasPlatform
     Component.onCompleted: RogService.acquire()
     Component.onDestruction: RogService.release()
 
@@ -38,6 +41,7 @@ PluginComponent {
 
                 DankIcon {
                     anchors.verticalCenter: parent.verticalCenter
+                    visible: !root.profileOnly
                     name: svc.available ? "keyboard" : "keyboard_off"
                     size: root.iconSize
                     color: svc.accentColor
@@ -46,7 +50,7 @@ PluginComponent {
                 Row {
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 2
-                    visible: svc.hasKeyboard
+                    visible: svc.hasKeyboard && !root.profileOnly
                     Repeater {
                         model: Math.max(0, svc.kbSupportedBrightness.length - 1)
                         Rectangle {
@@ -63,6 +67,8 @@ PluginComponent {
             MouseArea {
                 anchors.fill: parent
                 acceptedButtons: Qt.NoButton
+                // Covers the pill, so it sets the cursor the other widgets use.
+                cursorShape: Qt.PointingHandCursor
                 enabled: svc.scrollBrightness
                 onWheel: wheel => svc.stepKbBrightness(wheel.angleDelta.y > 0 ? 1 : -1)
             }
@@ -87,6 +93,7 @@ PluginComponent {
                 }
                 DankIcon {
                     anchors.horizontalCenter: parent.horizontalCenter
+                    visible: !root.profileOnly
                     name: svc.available ? "keyboard" : "keyboard_off"
                     size: root.iconSize
                     color: svc.accentColor
@@ -96,6 +103,8 @@ PluginComponent {
             MouseArea {
                 anchors.fill: parent
                 acceptedButtons: Qt.NoButton
+                // Covers the pill, so it sets the cursor the other widgets use.
+                cursorShape: Qt.PointingHandCursor
                 enabled: svc.scrollBrightness
                 onWheel: wheel => svc.stepKbBrightness(wheel.angleDelta.y > 0 ? 1 : -1)
             }
